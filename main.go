@@ -23,6 +23,10 @@ const (
 )
 
 var roman = map[string]int{
+	"L":    50,
+	"C":    100,
+	"D":    500,
+	"M":    1000,
 	"X":    10,
 	"IX":   9,
 	"VIII": 8,
@@ -35,7 +39,8 @@ var roman = map[string]int{
 	"I":    1,
 }
 
-var convIntToRoman = [10]int{
+var convIntToRoman = [11]int{
+	100,
 	10,
 	9,
 	8,

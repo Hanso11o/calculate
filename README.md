@@ -1,1 +1,1 @@
-Test task for Kata
+Аlternative tasks for kata

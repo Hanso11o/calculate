@@ -40,7 +40,7 @@ func main() {
 
 		switch {
 		case operand == "+":
-			fmt.Println(concatenation(arg1, arg2))
+			//some code
 		case operand == "-":
 			//some code
 		case operand == "*":

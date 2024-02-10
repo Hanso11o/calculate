@@ -40,7 +40,7 @@ func main() {
 
 		switch {
 		case operand == "+":
-			//some code
+			fmt.Println(arg1 + arg2)
 		case operand == "-":
 			//some code
 		case operand == "*":

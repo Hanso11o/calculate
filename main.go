@@ -1,70 +1,28 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"strings"
 )
 
-const (
-	LOW = "Вывод ошибки, так как строка " +
-		"не является математической операцией."
-	HIGH = "Вывод ошибки, так как формат математической операции " +
-		"не удовлетворяет заданию — два операнда и один оператор (+, -, /, *)."
-	SCALE = "Вывод ошибки, так как используются " +
-		"одновременно разные системы счисления."
-	DIV = "Вывод ошибки, так как в римской системе " +
-		"нет отрицательных чисел."
-	ZERO  = "Вывод ошибки, так как в римской системе нет числа 0."
-	RANGE = "Калькулятор умеет работать только с арабскими целыми " +
-		"числами или римскими цифрами от 1 до 10 включительно"
-)
-
 func main() {
-	var arg1 string
-		var operand string
-		var arg2 string
-		
-	fmt.Println("Введите выражение: ")
 
-	reader := bufio.NewReader(os.Stdin)
+	// fmt.Println("Введите выражение: ")
 
-	for {
+	// reader := bufio.NewReader(os.Stdin)
+	// var args []string
 
-		console, err := reader.ReadString('\n')
-		if err != nil {
-			panic(err)
-		}
-		console = strings.TrimSpace(console)
+	// for {
 
-		operand := func(r rune) bool {
-			return strings.ContainsRune("+-*/", r)
+	// }
 
-		}
+	const refString = "Mary had a little lamb"
+	const refStringTwo = "lamb lamb lamb lamb"
 
-		args := strings.FieldsFunc(console, operand)
+	out := strings.Replace(refString, "lamb", "wolf", -1)
+	fmt.Println(out)
 
-		var argsSplit []string
-
-		for _, arg := range args {
-			argsSplit = append(argsSplit, arg)
-		
-		args := []string
-		
-
-		switch {
-		case operand == "+":
-			fmt.Println(arg1 + arg2)
-		case operand == "-":
-			//some code
-		case operand == "*":
-			//some code
-		case operand == "/":
-			//some code
-		}
-		fmt.Println(argsSplit)
-
-	}
+	out = strings.Replace(refStringTwo, "lamb", "wolf", 2)
+	fmt.Println(out)
 
 }

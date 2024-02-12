@@ -22,21 +22,36 @@ const (
 )
 
 func main() {
+	var arg1 string
+		var operand string
+		var arg2 string
+		
+	fmt.Println("Введите выражение: ")
 
-	fmt.Println("Введите выражение")
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
+
 		console, err := reader.ReadString('\n')
 		if err != nil {
 			panic(err)
 		}
-		s := strings.ReplaceAll(console, " ", "")
+		console = strings.TrimSpace(console)
 
+		operand := func(r rune) bool {
+			return strings.ContainsRune("+-*/", r)
+
+		}
+
+		args := strings.FieldsFunc(console, operand)
+
+		var argsSplit []string
+
+		for _, arg := range args {
+			argsSplit = append(argsSplit, arg)
+		
 		args := []string
-		var arg1 string
-		var operand string
-		var arg2 string
+		
 
 		switch {
 		case operand == "+":
@@ -48,7 +63,7 @@ func main() {
 		case operand == "/":
 			//some code
 		}
-		fmt.Println(s)
+		fmt.Println(argsSplit)
 
 	}
 

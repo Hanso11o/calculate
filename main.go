@@ -1,28 +1,32 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 )
 
 func main() {
 
-	// fmt.Println("Введите выражение: ")
+	fmt.Println("Введите выражение: ")
 
-	// reader := bufio.NewReader(os.Stdin)
-	// var args []string
+	reader := bufio.NewReader(os.Stdin)
+	var args []string
+	var operand string
 
-	// for {
+	for {
+		console, err := reader.ReadString('\n')
+		if err != nil {
+			panic(err)
 
-	// }
+		}
+		console = strings.TrimSpace(console)
 
-	const refString = "Mary had a little lamb"
-	const refStringTwo = "lamb lamb lamb lamb"
-
-	out := strings.Replace(refString, "lamb", "wolf", -1)
-	fmt.Println(out)
-
-	out = strings.Replace(refStringTwo, "lamb", "wolf", 2)
-	fmt.Println(out)
+		args = strings.Split(console, " ")
+		fmt.Println(args[0])
+		fmt.Println(args[1])
+		fmt.Println(args[2])
+	}
 
 }

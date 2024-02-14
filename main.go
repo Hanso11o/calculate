@@ -13,7 +13,7 @@ func main() {
 
 	reader := bufio.NewReader(os.Stdin)
 	var args []string
-	var operand string
+	// var operand string
 
 	for {
 		console, err := reader.ReadString('\n')
@@ -24,9 +24,7 @@ func main() {
 		console = strings.TrimSpace(console)
 
 		args = strings.Split(console, " ")
-		fmt.Println(args[0])
-		fmt.Println(args[1])
-		fmt.Println(args[2])
+
 	}
 
 }

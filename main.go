@@ -23,18 +23,15 @@ func main() {
 		}
 
 		parts = strings.Split(input, "-")
-		parts[0] = strings.Trim(parts[0], "\"")
-		parts[1] = strings.Trim(parts[1], "\"")
-		// parts[2] = strings.Trim(parts[2], "\"")
-		// if len(parts) != 3 {
-		// 	fmt.Print("не достаточно аргументов")
-		// 	return
-		// }
+		if !strings.HasPrefix(parts[0], `"`) || !strings.HasSuffix(parts[0], `"`) {
 
-		fmt.Println(len(parts))
+			panic("первый аргумент должен быть в кавычках")
+
+		}
+		parts[0] = strings.Trim(parts[0], `"`)
+
 		fmt.Println(parts[0])
 		fmt.Println(parts[1])
-		// fmt.Println(parts[2])
 
 	}
 }

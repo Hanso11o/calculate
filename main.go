@@ -7,36 +7,36 @@ import (
 	"strings"
 )
 
-func inputReplaceAll(input string) string {
-	return strings.ReplaceAll(input, "\"", "")
+// func inputReplaceAll(input string) string {
+// 	return strings.ReplaceAll(input, "\"", "")
 
-}
+// }
 
-func inputSplitByAction(input string) (args []string, action rune) {
+// func inputSplitByAction(input string) (args []string, action rune) {
 
-	if strings.Contains(input, "-") {
-		args = strings.Split(input, "-")
-		action = '-'
-	}
+// 	if strings.Contains(input, "-") {
+// 		args = strings.Split(input, "-")
+// 		action = '-'
+// 	}
 
-	if strings.Contains(input, "+") {
-		args = strings.Split(input, "\\+")
-		action = '+'
-	}
+// 	if strings.Contains(input, "+") {
+// 		args = strings.Split(input, "\\+")
+// 		action = '+'
+// 	}
 
-	if strings.Contains(input, "*") {
-		args = strings.Split(input, "\\*")
-		action = '*'
-	}
+// 	if strings.Contains(input, "*") {
+// 		args = strings.Split(input, "\\*")
+// 		action = '*'
+// 	}
 
-	if strings.Contains(input, "/") {
-		args = strings.Split(input, "/")
-		action = '/'
-	}
+// 	if strings.Contains(input, "/") {
+// 		args = strings.Split(input, "/")
+// 		action = '/'
+// 	}
 
-	return
+// 	return
 
-}
+// }
 
 var args []string
 var action rune
@@ -55,9 +55,27 @@ func main() {
 			return
 		}
 
-		input = inputReplaceAll(input)
+		input = strings.ReplaceAll(input, "\"", "")
 
-		inputSplitByAction(input)
+		if strings.Contains(input, "-") {
+			args = strings.Split(input, "-")
+			action = '-'
+		}
+
+		if strings.Contains(input, "+") {
+			args = strings.Split(input, "\\+")
+			action = '+'
+		}
+
+		if strings.Contains(input, "*") {
+			args = strings.Split(input, "\\*")
+			action = '*'
+		}
+
+		if strings.Contains(input, "/") {
+			args = strings.Split(input, "/")
+			action = '/'
+		}
 
 		if action == '-' {
 			//some code

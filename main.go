@@ -82,7 +82,7 @@ func main() {
 			//some code
 		}
 		if action == '+' {
-			result = fmt.Sprintf("\"%s\"", args[0]+args[1])
+			result = args[0] + args[1]
 			fmt.Println(result)
 		}
 		if action == '*' {

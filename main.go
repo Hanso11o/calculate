@@ -7,31 +7,71 @@ import (
 	"strings"
 )
 
+func inputReplaceAll(input string) string {
+	return strings.ReplaceAll(input, "\"", "")
+
+}
+
+func inputSplitByAction(input string) (args []string, action rune) {
+
+	if strings.Contains(input, "-") {
+		args = strings.Split(input, "-")
+		action = '-'
+	}
+
+	if strings.Contains(input, "+") {
+		args = strings.Split(input, "\\+")
+		action = '+'
+	}
+
+	if strings.Contains(input, "*") {
+		args = strings.Split(input, "\\*")
+		action = '*'
+	}
+
+	if strings.Contains(input, "/") {
+		args = strings.Split(input, "/")
+		action = '/'
+	}
+
+	return
+
+}
+
+var args []string
+var action rune
+
 func main() {
+
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Println("Введите выражение:")
 
-	var parts []string
 	for {
-		var input string
+
 		input, err := reader.ReadString('\n')
 		if err != nil {
 			fmt.Printf("ошибка чтения строки [%v]", err)
 			return
-
 		}
 
-		parts = strings.Split(input, "-")
-		if !strings.HasPrefix(parts[0], `"`) || !strings.HasSuffix(parts[0], `"`) {
+		input = inputReplaceAll(input)
 
-			panic("первый аргумент должен быть в кавычках")
+		inputSplitByAction(input)
 
+		if action == '-' {
+			//some code
 		}
-		parts[0] = strings.Trim(parts[0], `"`)
-
-		fmt.Println(parts[0])
-		fmt.Println(parts[1])
+		if action == '+' {
+			fmt.Println(args[0] + args[1])
+		}
+		if action == '*' {
+			//some code
+		}
+		if action == '/' {
+			//some code
+		}
 
 	}
+
 }

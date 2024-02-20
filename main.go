@@ -63,12 +63,12 @@ func main() {
 		}
 
 		if strings.Contains(input, "+") {
-			args = strings.Split(input, "\\+")
+			args = strings.Split(input, "+")
 			action = '+'
 		}
 
 		if strings.Contains(input, "*") {
-			args = strings.Split(input, "\\*")
+			args = strings.Split(input, "*")
 			action = '*'
 		}
 

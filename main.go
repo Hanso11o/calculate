@@ -40,6 +40,7 @@ import (
 
 var args []string
 var action rune
+var result string
 
 func main() {
 
@@ -81,7 +82,8 @@ func main() {
 			//some code
 		}
 		if action == '+' {
-			fmt.Printf("\"%v\"\n", args[0]+args[1])
+			result = fmt.Sprintf("\"%s\"", args[0]+args[1])
+			fmt.Println(result)
 		}
 		if action == '*' {
 			//some code

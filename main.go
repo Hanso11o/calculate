@@ -63,7 +63,7 @@ func main() {
 			//some code
 		}
 		if action == '+' {
-			fmt.Println(args[0] + args[1])
+			fmt.Printf("\"%v\"\n", args[0]+args[1])
 		}
 		if action == '*' {
 			//some code

@@ -7,64 +7,51 @@ import (
 	"strings"
 )
 
-var args []string
-var action rune
-var result string
-
 func main() {
 
-	reader := bufio.NewReader(os.Stdin)
+	var arg1 string
+	var operator string
+	var arg2 string
 
 	fmt.Println("Введите выражение:")
 
-	for {
+	fmt.Scanf("%q%s", &arg1, &operator)
 
-		input, err := reader.ReadString('\n')
-		if err != nil {
-			fmt.Printf("ошибка чтения строки [%v]", err)
-			return
-		}
+	console := bufio.NewScanner(os.Stdin)
+	console.Scan()
+	arg2 = console.Text()
 
-		input = strings.ReplaceAll(input, "\"", "")
+	wordRune1 := []rune(arg1)
+	wordRune2 := []rune(arg2)
 
-		input = strings.TrimSpace(input)
+	if arg1 == "" {
+		panic("первым аргументом дожна быть строка, неправильный ввод")
 
-		if strings.Contains(input, "-") {
-			args = strings.Split(input, "-")
-			action = '-'
-		}
+	}
 
-		if strings.Contains(input, "+") {
-			args = strings.Split(input, "+")
-			action = '+'
+	if len(wordRune1) <= 10 && len(wordRune2) <= 12 {
+		beginWord := rune(arg2[0])
+		endWord := rune(arg2[len(arg2)-1])
 
-		}
+		switch operator {
+		case "+":
+			if string(beginWord) == "" && string(endWord) == "" {
+				arg2 = arg2[1 : len(arg2)-1]
+				fmt.Printf("\"%s%s\"", arg1, arg2)
 
-		if strings.Contains(input, "*") {
-			args = strings.Split(input, "*")
-			action = '*'
-		}
+			} else {
+				panic("неправильный ввод второй строки")
+			}
 
-		if strings.Contains(input, "/") {
-			args = strings.Split(input, "/")
-			action = '/'
-		}
+		case "-":
+			if string(beginWord) == "" && string(endWord) == "" {
+				arg2 = arg2[1 : len(arg2)-1]
+				arg1 = strings.ReplaceAll(arg1, arg2, "")
+				fmt.Printf("%q", arg1)
+			} else {
+				panic("неправильный ввод второй строки")
+			}
 
-		if action == '-' {
-			//some code
-		}
-		if action == '+' {
-
-			args[1] = strings.TrimSpace(args[1])
-			result = args[0] + args[1]
-			result = strings.ReplaceAll(result, " ", "")
-			fmt.Printf("\"%v\"", result)
-		}
-		if action == '*' {
-			//some code
-		}
-		if action == '/' {
-			//some code
 		}
 
 	}

@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -52,7 +53,49 @@ func main() {
 				panic("неправильный ввод второй строки")
 			}
 
+		case "*":
+			if arg2 == "1" || arg2 == "2" || arg2 == "3" || arg2 == "4" || arg2 == "5" || arg2 == "6" ||
+				arg2 == "7" || arg2 == "8" || arg2 == "9" || arg2 == "10" {
+				argToInt, err := strconv.Atoi(arg2)
+				if err != nil {
+					panic("ошибка конвертации строки в число")
+				}
+
+				wordRune1 = []rune(strings.Repeat(arg1, argToInt))
+				if len(wordRune1) > 40 {
+					wordRune1 := wordRune1[:40]
+					fmt.Printf("\"%s...\"", string(wordRune1))
+
+				} else {
+					fmt.Printf("%q", string(wordRune1))
+				}
+
+			} else {
+				panic("некорректное число")
+
+			}
+
+		case "/":
+			if arg2 == "1" || arg2 == "2" || arg2 == "3" || arg2 == "4" || arg2 == "5" || arg2 == "6" ||
+				arg2 == "7" || arg2 == "8" || arg2 == "9" || arg2 == "10" {
+				argToInt, err := strconv.Atoi(arg2)
+				if err != nil {
+					panic("ошибка конвертации строки в число")
+				}
+				wordRune1 := wordRune1[:len(wordRune1)/argToInt]
+				fmt.Printf("%q", string(wordRune1))
+
+			} else {
+				panic("некорректное число")
+
+			}
+		default:
+			panic("некорректная арифметическая операция")
+
 		}
+
+	} else {
+		panic("некорректная длина введенных строк")
 
 	}
 

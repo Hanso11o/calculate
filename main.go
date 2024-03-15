@@ -9,93 +9,90 @@ import (
 )
 
 func main() {
+	var args []string
+	var action rune
+	var mul int
+	reader := bufio.NewReader(os.Stdin)
 
-	var arg1 string
-	var operator string
-	var arg2 string
+	for {
 
-	fmt.Println("Введите выражение:")
+		fmt.Println("Введите выражение:")
+		text, _ := reader.ReadString('\n')
 
-	fmt.Scanf("%q%s", &arg1, &operator)
+		if strings.Contains(text, "+") {
+			args = strings.Split(text, "+")
+			action = '+'
 
-	console := bufio.NewScanner(os.Stdin)
-	console.Scan()
-	arg2 = console.Text()
+		} else if strings.Contains(text, "-") {
+			args = strings.Split(text, "-")
+			action = '-'
 
-	wordRune1 := []rune(arg1)
-	wordRune2 := []rune(arg2)
+		} else if strings.Contains(text, "*") {
+			args = strings.Split(text, "*")
+			action = '*'
 
-	if arg1 == "" {
-		panic("первым аргументом дожна быть строка, неправильный ввод")
+		} else if strings.Contains(text, "/") {
+			args = strings.Split(text, "/")
+			action = '/'
+		} else {
+			panic("некорректный знак действия")
+		}
 
-	}
+		if action == '*' || action == '/' {
+			strings.Contains(args[1], "\"")
+			panic("стоку можно умножать или делить только на строку")
+		}
 
-	if len(wordRune1) <= 10 && len(wordRune2) <= 12 {
-		beginWord := rune(arg2[0])
-		endWord := rune(arg2[len(arg2)-1])
-
-		switch operator {
-		case "+":
-			if string(beginWord) == "" && string(endWord) == "" {
-				arg2 = arg2[1 : len(arg2)-1]
-				fmt.Printf("\"%s%s\"", arg1, arg2)
-
-			} else {
-				panic("неправильный ввод второй строки")
-			}
-
-		case "-":
-			if string(beginWord) == "" && string(endWord) == "" {
-				arg2 = arg2[1 : len(arg2)-1]
-				arg1 = strings.ReplaceAll(arg1, arg2, "")
-				fmt.Printf("%q", arg1)
-			} else {
-				panic("неправильный ввод второй строки")
-			}
-
-		case "*":
-			if arg2 == "1" || arg2 == "2" || arg2 == "3" || arg2 == "4" || arg2 == "5" || arg2 == "6" ||
-				arg2 == "7" || arg2 == "8" || arg2 == "9" || arg2 == "10" {
-				argToInt, err := strconv.Atoi(arg2)
-				if err != nil {
-					panic("ошибка конвертации строки в число")
-				}
-
-				wordRune1 = []rune(strings.Repeat(arg1, argToInt))
-				if len(wordRune1) > 40 {
-					wordRune1 := wordRune1[:40]
-					fmt.Printf("\"%s...\"", string(wordRune1))
-
-				} else {
-					fmt.Printf("%q", string(wordRune1))
-				}
-
-			} else {
-				panic("некорректное число")
-
-			}
-
-		case "/":
-			if arg2 == "1" || arg2 == "2" || arg2 == "3" || arg2 == "4" || arg2 == "5" || arg2 == "6" ||
-				arg2 == "7" || arg2 == "8" || arg2 == "9" || arg2 == "10" {
-				argToInt, err := strconv.Atoi(arg2)
-				if err != nil {
-					panic("ошибка конвертации строки в число")
-				}
-				wordRune1 := wordRune1[:len(wordRune1)/argToInt]
-				fmt.Printf("%q", string(wordRune1))
-
-			} else {
-				panic("некорректное число")
-
-			}
-		default:
-			panic("некорректная арифметическая операция")
+		if len(args[0]) < 1 || len(args[0]) > 12 && len(args[1]) < 1 || len(args[1]) > 12 {
+			panic("калькулятор может принимать строки длиной не более 10 символов")
 
 		}
 
-	} else {
-		panic("некорректная длина введенных строк")
+		if !strings.HasPrefix(args[0], "\"") && !strings.HasSuffix(args[0], "\"") {
+			panic("первым аргументом выражения, подаваемым на вход, должна быть строка")
+
+		}
+
+		for i := 0; i < len(args); i++ {
+			args[0] = strings.ReplaceAll(args[0], "\"", "")
+			args[1] = strings.ReplaceAll(args[1], "\"", "")
+			args[0] = strings.TrimSpace(args[0])
+			args[1] = strings.TrimSpace(args[1])
+
+		}
+
+		if action == '+' {
+
+			result := args[0] + args[1]
+			result = strings.ReplaceAll(result, " ", "")
+			fmt.Printf("\"%v\"\n", result)
+		}
+
+		if action == '-' {
+			if strings.Contains(args[0], args[1]) {
+				args[0] = strings.Replace(args[0], args[1], "", 1)
+
+			} else {
+				fmt.Printf("\"%v\"", args[0])
+			}
+
+		}
+
+		if action == '*' {
+
+			arg0 := strings.ReplaceAll(args[0], " ", "")
+			arg1 := strings.ReplaceAll(args[1], " ", "")
+			mul, _ = strconv.Atoi(arg1)
+			if mul < 1 || mul > 10 {
+				panic("калькулятор может принимать на вход числа от 1 до 10 включительно")
+			}
+			result := ""
+			for i := 0; i < mul; i++ {
+				result += arg0
+			}
+			fmt.Printf("\"%v\"\n", result)
+
+		}
 
 	}
 

@@ -64,9 +64,7 @@ func main() {
 		}
 
 		if action == '+' {
-
 			result := args[0] + args[1]
-			result = strings.ReplaceAll(result, " ", "")
 			fmt.Printf("\"%v\"\n", result)
 		}
 

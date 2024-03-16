@@ -12,6 +12,8 @@ func main() {
 	var args []string
 	var action rune
 	var mul int
+	var div int
+	var result string
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
@@ -75,12 +77,17 @@ func main() {
 			if mul < 1 || mul > 10 {
 				panic("калькулятор может принимать на вход числа от 1 до 10 включительно")
 			}
-			result := ""
+			result = ""
 			for i := 0; i < mul; i++ {
 				result += args[0]
 			}
 			fmt.Printf("\"%v\"\n", result)
 		case action == '/':
+			div, _ = strconv.Atoi(args[1])
+			if div < 1 || div > 10 {
+				panic("калькулятор может принимать на вход числа от 1 до 10 включительно")
+			}
+			args[0][:len(args0)/div]
 
 		}
 

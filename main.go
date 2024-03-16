@@ -57,12 +57,12 @@ func main() {
 
 		}
 
-		if action == '+' {
+		switch {
+		case action == '+':
 			result := args[0] + args[1]
 			fmt.Printf("\"%v\"\n", result)
-		}
 
-		if action == '-' {
+		case action == '-':
 			if strings.Contains(args[0], args[1]) {
 				args[0] = strings.Replace(args[0], args[1], "", 1)
 				fmt.Printf("\"%v\"\n", args[0])
@@ -70,10 +70,7 @@ func main() {
 			} else {
 				fmt.Printf("\"%v\"\n", args[0])
 			}
-
-		}
-
-		if action == '*' {
+		case action == '*':
 			mul, _ = strconv.Atoi(args[1])
 			if mul < 1 || mul > 10 {
 				panic("калькулятор может принимать на вход числа от 1 до 10 включительно")
@@ -83,6 +80,7 @@ func main() {
 				result += args[0]
 			}
 			fmt.Printf("\"%v\"\n", result)
+		case action == '/':
 
 		}
 

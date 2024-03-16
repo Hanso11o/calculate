@@ -11,9 +11,8 @@ import (
 func main() {
 	var args []string
 	var action rune
-	var mul int
-	var div int
 	var result string
+
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
@@ -44,10 +43,10 @@ func main() {
 			panic("первым аргументом выражения, подаваемым на вход, должна быть строка")
 
 		}
-		if len(args[0]) == 0 || len(args[0]) > 12 {
+		if len(args[0]) < 1 || len(args[0]) > 13 {
 			panic("калькулятор может принимать строки длиной не более 10 символов")
 
-		} else if len(args[1]) == 0 || len(args[1]) > 12 {
+		} else if len(args[1]) < 1 || len(args[1]) > 13 {
 			panic("вторым аргументом выражения, подаваемым на вход, должна быть строка либо целое число")
 		}
 
@@ -73,6 +72,7 @@ func main() {
 				fmt.Printf("\"%v\"\n", args[0])
 			}
 		case action == '*':
+			var mul int
 			mul, _ = strconv.Atoi(args[1])
 			if mul < 1 || mul > 10 {
 				panic("калькулятор может принимать на вход числа от 1 до 10 включительно")
@@ -83,11 +83,12 @@ func main() {
 			}
 			fmt.Printf("\"%v\"\n", result)
 		case action == '/':
+			var div int
 			div, _ = strconv.Atoi(args[1])
 			if div < 1 || div > 10 {
 				panic("калькулятор может принимать на вход числа от 1 до 10 включительно")
 			}
-			args[0][:len(args0)/div]
+			fmt.Printf("\"%v\"\n", args[0][:len(args[0])/div])
 
 		}
 

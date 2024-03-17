@@ -81,7 +81,13 @@ func main() {
 			for i := 0; i < mul; i++ {
 				result += args[0]
 			}
-			fmt.Printf("\"%v\"\n", result)
+			if len(result) > 40 {
+				result = result[:40]
+				fmt.Printf("\"%v...\"\n", result)
+			} else {
+				fmt.Printf("\"%v\"\n", result)
+			}
+
 		case action == '/':
 			var div int
 			div, _ = strconv.Atoi(args[1])

@@ -25,7 +25,7 @@ func main() {
 			action = '+'
 
 		} else if strings.Contains(text, "-") {
-			args = strings.Split(text, "-")
+			args = strings.Split(text, " - ")
 			action = '-'
 
 		} else if strings.Contains(text, "*") {
